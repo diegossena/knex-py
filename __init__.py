@@ -73,7 +73,7 @@ class QueryBuilder_Select:
                 else ' ORDER BY ' + ', '.join(self.orderBy),
                 # LIMIT
                 '' if self.limit == 0
-                else ' {} {}'.format('LIMIT', self.limit)
+                else ' LIMIT' + str(self.limit)
             ]
         ])
 
