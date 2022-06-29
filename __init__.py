@@ -1,18 +1,5 @@
-import enum
 from inspect import getmembers
 from typing import TypedDict, Union
-# Cached
-components = [
-    'columns',
-    'join',
-    'where',
-    'union',
-    'group',
-    'having',
-    'order',
-    'limit',
-    'offset'
-]
 # Utils
 
 
