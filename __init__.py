@@ -55,27 +55,27 @@ class QueryBuilder_Select:
         self.limit = limit
 
     def toSQL(self):
-        return ''.join([
-            val for val in [
-                # SELECT
-                'SELECT ',
-                ', '.join(self.columns),
-                # FROM
-                ' FROM ' + ', '.join(self.tables),
-                # WHERE
-                '' if len(self.where) == 0
-                else ' '.join([
-                    ' WHERE',
-                    ' '.join(self.where)
-                ]),
-                # ORDER BY
-                '' if len(self.orderBy) == 0
-                else ' ORDER BY ' + ', '.join(self.orderBy),
-                # LIMIT
-                '' if self.limit == 0
-                else ' LIMIT' + str(self.limit)
-            ]
-        ])
+        return (
+            # SELECT
+            'SELECT '
+            + ', '.join(self.columns)
+            # FROM
+            + ' FROM ' + ', '.join(self.tables)
+            if len(self.tables)
+            else ''
+            # WHERE
+            + ' WHERE' + ' '.join(self.where)
+            if len(self.where)
+            else ''
+            # ORDER BY
+            + ' ORDER BY ' + ', '.join(self.orderBy)
+            if len(self.orderBy)
+            else ''
+            # LIMIT
+            + ' LIMIT' + str(self.limit)
+            if self.limit
+            else ''
+        )
 
 
 def single(value: Union[str, QueryBuilder_Select], alias: str = None):
