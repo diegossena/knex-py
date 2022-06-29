@@ -230,19 +230,3 @@ class Database:
 
     def __call__(self, tableName: str):
         return QueryBuilder(self.__db_cursor, tableName)
-
-
-database = Database({
-    'client': 'mysql',
-    'host': 'localhost',
-    'user': 'root',
-    'password': 'root',
-    'database': 'camunda'
-})
-
-print(
-    database('ACT_HI_ACTINST')
-    .select('test', 'test2')
-    .first()
-    .toSQL()
-)
