@@ -189,28 +189,33 @@ class QueryBuilder:
 
 
 class ConnectionConfig(TypedDict):
-    client: str
     host: str
     user: str
     password: str
     database: str
 
 
+class Config(TypedDict):
+    client: str
+    connection: ConnectionConfig
+
+
 class Database:
-    def __init__(self, config: ConnectionConfig):
+    def __init__(self, config: Config):
         if 'client' not in config:
             raise Exception(
                 "Required configuration option 'client' is missing."
             )
         if(config['client'] == 'mysql'):
-            from mysql.connector import connect as mysql_connect
-            self.__db_conn = mysql_connect(
-                host=config["host"],
-                user=config["user"],
-                password=config["password"],
-                database=config["database"]
-            )
-            self.__db_cursor = self.__db_conn.cursor()
+            if('connection' in config):
+                from mysql.connector import connect as mysql_connect
+                self.__db_conn = mysql_connect(
+                    host=config['connection']['host'],
+                    user=config['connection']['user'],
+                    password=config['connection']['password'],
+                    database=config['connection']['database']
+                )
+                self.__db_cursor = self.__db_conn.cursor()
         else:
             raise Exception(
                 "Invalid clientName given: {}".format(config['client']))
