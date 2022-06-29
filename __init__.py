@@ -42,11 +42,11 @@ class QueryBuilder_Select_OrderBy:
 class QueryBuilder_Select:
     def __init__(
         self,
-        columns: list[str],
-        tables: list[str],
-        limit=0,
+        columns: list[str] = [],
+        tables: list[str] = [],
         where: list[str] = [],
-        orderBy: list[str] = []
+        orderBy: list[str] = [],
+        limit=0,
     ):
         self.columns = columns
         self.tables = tables
