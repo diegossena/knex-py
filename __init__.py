@@ -27,7 +27,7 @@ def lodash_groupBy(array: list, prop: str):
             result[key] = []
         result[key].append(item)
     return result
-
+#
 
 class QueryBuilder_Select_OrderBy:
     def __init__(
@@ -37,7 +37,6 @@ class QueryBuilder_Select_OrderBy:
     ):
         self.field = field
         self.direction = direction
-#
 
 class QueryBuilder_Select:
     def __init__(
